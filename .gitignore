@@ -1,5 +1,1 @@
 *.pyc
-todolistdb
-.project
-.pydevproject
-django_hstore_flattenfields.egg*
