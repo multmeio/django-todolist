@@ -72,7 +72,7 @@ def list(request, todolist_id, page=1):
     try:
         todos = paginator.page(int(page))
     except EmptyPage:
-        pass
+        todos = []
 
     data = {
         'todolist': todolist,
