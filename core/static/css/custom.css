@@ -1,0 +1,52 @@
+.right{
+    float: right;
+}
+
+.center{
+    text-align: center;
+}
+
+.icon-delete{
+    margin: 5px 0px;
+}
+
+.li-add-box{
+    background-color: #F8F6F6;
+    cursor: text;
+}
+
+.input-text{
+    background-color: #F8F6F6;
+    color: #8B8F97;
+    font-size:12px;
+    line-height:21px;
+    border: 0px solid;
+    padding: 5px 0px;
+    width: 100%;
+}
+
+.input-text:focus{
+    outline: none;
+}
+
+.lists-page-link{
+    margin-left: 70px;
+}
+
+li {
+    word-wrap: break-word;
+}
+
+.todo-controls {
+    height: auto;
+    width: 433px;
+}
+
+.todo-controls li {
+    float: none;
+}
+
+.message {
+    position: relative;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <section class="todo">
+        <ul class="todo-controls">
+            <li><h1>{{ todolist }}</h1></li>
+        </ul>
+
+        <ul class="todo-list">
+            {% if todolist.description %}
+                <li>{{ todolist.description }}</li>
+            {% endif %}
+
+            {% for todo in todos.object_list %}
+                <li>
+                    <input type="checkbox" id="done_{{ todo.pk }}"
+                           todolist="todolist_{{ todolist.pk }}"
+                           {% if todo.is_done %}checked="checked"{% endif %}/>
+                    <label class="toggle" for="done_{{ todo.pk }}"></label>
+
+                    {{ todo }}.
+                    <a href="{% url todo_delete todolist.pk todo.pk %}"
+                       class="icon-delete right">Delete</a>
+                </li>
+            {% empty %}
+                <li>This list doesn't have todos...</li>
+            {% endfor %}
+            <li class="li-add-box">
+                <form action="{% url todo_add todolist.pk %}" method="post">
+                    {% csrf_token %}
+                    {{ todo_form.name }}
+                </form>
+            </li>
+        </ul>
+
+        <ul class="todo-pagination">
+            <li class="previous">
+                {% if todos.has_previous %}
+                    <a href="{% url todos todolist.pk page|add:-1 %}">
+                        <i class="icon-previous"></i> Previous
+                    </a>
+                {% else %}
+                    <span><i class="icon-previous"></i> Previous</span>
+                {% endif %}
+            </li>
+
+            <li class="lists-page-link">
+                <a href="{% url todolists %}">
+                    <i class="icon-previous"></i> Back to the List page.
+                </a>
+            </li>
+
+            <li class="next">
+                {% if todos.has_next %}
+                    <a href="{% url todos todolist.pk page|add:+1 %}">
+                        Next <i class="icon-next"></i>
+                    </a>
+                {% else %}
+                    <span>Next <i class="icon-next"></i></span>
+                {% endif %}
+            </li>
+        </ul>
+    </section>
+{% endblock %}

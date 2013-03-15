@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Django Todo List</title>
+        <meta charset="UTF-8" />
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/messages.css" />
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
+    </head>
+
+    <body>
+        <div class="container">
+            {% for message in messages %}
+                <div class="{{ message.tags }} message">
+                    <h3>{{ message }}</h3>
+                </div>
+            {% endfor %}
+
+            {% block container %}{% endblock %}
+        </div>
+    </body>
+
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/custom.js"></script>
+</html>

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <section class="todo">
+        <ul class="todo-controls">
+            <li><h1>All Lists</h1></li>
+        </ul>
+
+        <ul class="todo-list">
+            {% for todolist in todolists.object_list %}
+                <li>
+                    <a href="{% url todos todolist.pk %}">
+                        {{ todolist }}
+                    </a>
+                    - {{ todolist.todos_state }}
+                    <a href="{% url todolist_delete todolist.pk %}"
+                       class="icon-delete right">Delete</a>
+                </li>
+            {% empty %}
+                <li>There is not lists to show...</li>
+            {% endfor %}
+            <li class="li-add-box">
+                <form action="{% url todolist_add %}" method="post">
+                    {% csrf_token %}
+                    {{ todolist_form.name }}
+                </form>
+            </li>
+        </ul>
+
+        <ul class="todo-pagination">
+            <li class="previous">
+                {% if todolists.has_previous %}
+                    <a href="{% url todolists page|add:-1 %}">
+                        <i class="icon-previous"></i> Previous
+                    </a>
+                {% else %}
+                    <span><i class="icon-previous"></i> Previous</span>
+                {% endif %}
+            </li>
+            <li class="next">
+                {% if todolists.has_next %}
+                    <a href="{% url todolists page|add:+1 %}">
+                        Next <i class="icon-next"></i>
+                    </a>
+                {% else %}
+                    <span>Next <i class="icon-next"></i></span>
+                {% endif %}
+            </li>
+        </ul>
+    </section>
+{% endblock %}
